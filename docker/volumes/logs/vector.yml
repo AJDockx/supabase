@@ -155,6 +155,8 @@ transforms:
       }
       .metadata.parsed.error_severity = upcase!(.metadata.parsed.error_severity)
 
+    
+
 sinks:
   logflare_auth:
     type: 'http'
@@ -166,7 +168,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+         x-api-key: dummy       
     uri: 'http://analytics:4000/api/logs?source_name=gotrue.logs.prod'
   logflare_realtime:
     type: 'http'
@@ -178,7 +181,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     uri: 'http://analytics:4000/api/logs?source_name=realtime.logs.prod'
   logflare_rest:
     type: 'http'
@@ -190,7 +194,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     uri: 'http://analytics:4000/api/logs?source_name=postgREST.logs.prod'
   logflare_db:
     type: 'http'
@@ -202,7 +207,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     # We must route the sink through kong because ingesting logs before logflare is fully initialised will
     # lead to broken queries from studio. This works by the assumption that containers are started in the
     # following order: vector > db > logflare > kong
@@ -217,7 +223,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     uri: 'http://analytics:4000/api/logs?source_name=deno-relay-logs'
   logflare_storage:
     type: 'http'
@@ -229,7 +236,8 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     uri: 'http://analytics:4000/api/logs?source_name=storage.logs.prod.2'
   logflare_kong:
     type: 'http'
@@ -242,5 +250,6 @@ sinks:
     request:
       retry_max_duration_secs: 10
       headers:
-        x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        #x-api-key: ${LOGFLARE_PUBLIC_ACCESS_TOKEN?LOGFLARE_PUBLIC_ACCESS_TOKEN is required}
+        x-api-key: dummy
     uri: 'http://analytics:4000/api/logs?source_name=cloudflare.logs.prod'
