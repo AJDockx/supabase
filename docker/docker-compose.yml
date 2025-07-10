@@ -329,6 +329,14 @@ services:
       SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
       # TODO: Allow configuring VERIFY_JWT per function. This PR might help: https://github.com/supabase/cli/pull/786
       VERIFY_JWT: "${FUNCTIONS_VERIFY_JWT}"
+      #Added for notebooksLM
+      NOTEBOOK_CHAT_URL: "${NOTEBOOK_CHAT_URL}"
+      NOTEBOOK_GENERATION_URL: "${NOTEBOOK_GENERATION_URL}"
+      AUDIO_GENERATION_WEBHOOK_URL: "${AUDIO_GENERATION_WEBHOOK_URL}"
+      DOCUMENT_PROCESSING_WEBHOOK_URL: "${DOCUMENT_PROCESSING_WEBHOOK_URL}"
+      ADDITIONAL_SOURCES_WEBHOOK_URL: "${ADDITIONAL_SOURCES_WEBHOOK_URL}"
+      NOTEBOOK_GENERATION_AUTH: "${NOTEBOOK_GENERATION_AUTH}"
+
     command:
       [
         "start",
@@ -464,6 +472,7 @@ services:
       retries: 3
     environment:
       LOGFLARE_PUBLIC_ACCESS_TOKEN: ${LOGFLARE_PUBLIC_ACCESS_TOKEN}
+      LOGFLARE_PRIVATE_ACCESS_TOKEN: ${LOGFLARE_PRIVATE_ACCESS_TOKEN}
     command:
       [
         "--config",
@@ -506,7 +515,7 @@ services:
       POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      DATABASE_URL: ecto://supabase_admin:${POSTGRES_PASSWORD}@db:${POSTGRES_PORT}/_supabase
+      DATABASE_URL: ecto://supabase_admin:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/_supabase
       CLUSTER_POSTGRES: true
       SECRET_KEY_BASE: ${SECRET_KEY_BASE}
       VAULT_ENC_KEY: ${VAULT_ENC_KEY}
@@ -518,6 +527,7 @@ services:
       POOLER_DEFAULT_POOL_SIZE: ${POOLER_DEFAULT_POOL_SIZE}
       POOLER_MAX_CLIENT_CONN: ${POOLER_MAX_CLIENT_CONN}
       POOLER_POOL_MODE: transaction
+      DB_POOL_SIZE: ${POOLER_DB_POOL_SIZE}
     command:
       [
         "/bin/sh",
